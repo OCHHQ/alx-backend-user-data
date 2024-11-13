@@ -4,6 +4,7 @@
 from typing import List, TypeVar
 from flask import request
 
+
 class Auth:
     """ Auth class to manage API authentication """
 
@@ -18,7 +19,8 @@ class Auth:
         return False
 
     def authorization_header(self, request=None) -> str:
-        """ Method to return the authorization header, which returns None for now.
+        """ Method to return the authorization
+            header, which returns None for now.
         Args:
             request (Flask Request): The Flask request object.
         Returns:
