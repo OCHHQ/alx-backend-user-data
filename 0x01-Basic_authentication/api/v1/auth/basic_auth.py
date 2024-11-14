@@ -84,9 +84,8 @@ class BasicAuth(Auth):
             return None, None
 
         # Split the string into email and password using the colon
-        user_email, user_password = decoded_base64_authorization_header.split(':', 1)
-        return (user_email,
-                user_password)
+        credentials = decoded_base64_authorization_header.split(':', 1)
+        return credentials[0], credentials[1]
 
     def user_object_from_credentials(
         self, user_email: str, user_pwd: str
