@@ -50,11 +50,11 @@ class Auth:
         """
         if request is None:
             return None
-        #check if the authenicaton header is in the request
+        # check if the authenicaton header is in the request
         if 'Authorization' not in request.headers:
             return None
 
-        #Return the value of the 'Authorization' header
+        # Return the value of the 'Authorization' header
         return request.headers.get('Authorization')
 
     def current_user(self, request=None) -> TypeVar('User'):
