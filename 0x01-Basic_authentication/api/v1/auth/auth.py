@@ -46,12 +46,20 @@ class Auth:
         Args:
             request (Flask Request): The Flask request object.
         Returns:
-            str: Always returns None.
+            str: set the value auth header or None if not present.
         """
-        return None
+        if request is None:
+            return None
+        #check if the authenicaton header is in the request
+        if 'Authorization' not in request.headers:
+            return None
+
+        #Return the value of the 'Authorization' header
+        return request.headers.get('Authorization')
 
     def current_user(self, request=None) -> TypeVar('User'):
         """ Method to return the current user, which returns None for now.
+
         Args:
             request (Flask Request): The Flask request object.
         Returns:
