@@ -21,7 +21,7 @@ if auth_type == 'auth':
     auth = Auth()
 elif auth_type == 'basic_auth':
     from api.v1.auth.basic_auth import BasicAuth
-    auth = Auth()
+    auth = BasicAuth
 
 
 @app.before_request
