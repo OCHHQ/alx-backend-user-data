@@ -12,6 +12,7 @@ class SessionAuth(Auth):
     """
 
     user_id_by_session_id: Dict = {}
+
     def create_session(self, user_id: str = None) -> str:
         """
         Create a sesion ID from a user_id
