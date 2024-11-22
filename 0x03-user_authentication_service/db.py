@@ -6,6 +6,7 @@ from sqlalchemy.orm.session import Session
 from user import Base, User
 import bcrypt
 
+
 class DB:
     """DB class for user database operations"""
 
@@ -27,11 +28,11 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """
         Add a new user to the database
-        
+
         Args:main.p
             email (str): User's email
             hashed_password (str): Hashed password for the user
-        
+
         Returns:
             User: The newly created user object
         """
