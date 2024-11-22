@@ -54,3 +54,28 @@ class DB:
             raise NoResultFound("No user found with the given filter")
         except Exception as e:
             raise InvalidRequestError(f"Invalid arguments provided: {e}")
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """
+        Update a user's attributes in the database.
+
+        Args:
+            user_id (int): The ID of the user to update.
+            kwargs: Arbitrary keyword arguments corresponding
+            to user attributes.
+
+        Raises:
+            ValueError: If an invalid attribute is passed in kwargs.
+        """
+        # Step 1: Find the user by ID using find_user_by
+        user = self.find_user_by(id=user_id)
+
+        # Step 2: Update user's attributes
+        for key, value in kwargs.items():
+            # Validate if the key is a valid attribute of the User model
+            if not hasattr(user, key):
+                raise ValueError(f"Invalid attribute: {key}")
+            setattr(user, key, value)
+
+        # Step 3: Commit the changes to the database
+        self._session.commit()
