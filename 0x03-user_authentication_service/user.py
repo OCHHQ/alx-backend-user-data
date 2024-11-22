@@ -7,10 +7,11 @@ from sqlalchemy import Column, Integer, String
 
 Base = declarative_base()
 
+
 class User(Base):
     """
     User model for the authentication service database
-    
+
     Attributes:
         __tablename__: Name of the database table
         id: Primary key (integer)
