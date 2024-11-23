@@ -3,28 +3,26 @@
 Authentication module for password hashing
 """
 import bcrypt
-from typing import Union
 
 
 def _hash_password(password: str) -> bytes:
     """
-    Hashes a password with a random salt using bycrpt.
+    Hashes a password with a random salt using bcrypt.
 
     Args:
-        password (str): the password string to be hashed
+        password (str): The plaintext password to be hashed.
+
     Returns:
-        bytes: the salted hash of the password
-
-    implementation details:
-        1.encode the password string to bytes
-        2.Generate a salt and hash the password using bcrypt
-        3.The salt is automatically stored as part of the hashed password
+        bytes: The salted hash of the password.
     """
-    # converting the password string to bytes
-    encoded_password = password.encode(utf-8)
+    if not isinstance(password, str):
+        raise TypeError("Password must be a string")
 
-    # here generate salt and hashed
+    # Step 1: Generate a salt
     salt = bcrypt.gensalt()
-    hashed_password = bcrypt.hashpw(encoded_password, salt)
 
-    return hash_password
+    # Step 2: Hash the password with the salt
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+
+    # Step 3: Return the hashed password
+    return hashed_password
