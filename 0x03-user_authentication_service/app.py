@@ -9,6 +9,7 @@ from flask import Flask, jsonify
 
 app = flask(__name__)
 
+
 @app.route('/', methods=['GET'])
 def welcome() -> jsonify:
     """
@@ -21,13 +22,14 @@ def welcome() -> jsonify:
    Return:
     Dict[str, str]: JSON response containing welcome
     format: {"message": "Bienvenue"}
-   
+
    Response Details:
     -Content-Type: application/json
     -Status Code: 200 (ok)
     -Character Encoding: UTF-8
     """
     return jsonify({"messasge": "Bienvenue"})
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
