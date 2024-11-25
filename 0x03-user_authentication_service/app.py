@@ -3,6 +3,8 @@
 Basic Flask app module for user authentication service.
 """
 from flask import Flask, jsonify
+from auth import Auth
+from typing import Dict, Any
 
 app = Flask(__name__)
 
@@ -51,4 +53,8 @@ def users() -> Any:
 
 
 if __name__ == "__main__":
+    """
+    Main entry point of the application.
+    Only executes if the script is run directly (not imported as a module).
+    """
     app.run(host="0.0.0.0", port=5000)
