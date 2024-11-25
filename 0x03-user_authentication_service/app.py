@@ -1,34 +1,21 @@
 #!/usr/bin/env python3
 """
-Baic flask app module for user authentication
-This module create a simple web application using
-Flask framework that serves as a foundation for
-our authentication service
+Basic Flask app module for user authentication service.
 """
 from flask import Flask, jsonify
 
-app = flask(__name__)
+app = Flask(__name__)
 
 
 @app.route('/', methods=['GET'])
 def welcome() -> jsonify:
     """
-    Root endpoint welcome users to the authentication service
+    Root endpoint returning a JSON welcome message.
 
-    Route:
-        -URL:/
-        _Method: GET
-
-   Return:
-    Dict[str, str]: JSON response containing welcome
-    format: {"message": "Bienvenue"}
-
-   Response Details:
-    -Content-Type: application/json
-    -Status Code: 200 (ok)
-    -Character Encoding: UTF-8
+    Returns:
+        flask.Response: JSON response {"message": "Bienvenue"}
     """
-    return jsonify({"messasge": "Bienvenue"})
+    return jsonify({"message": "Bienvenue"})
 
 
 if __name__ == "__main__":
