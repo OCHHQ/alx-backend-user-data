@@ -5,7 +5,7 @@ Authentication module for password hashing
 from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
-from bcrypt import hashpw
+import bcrypt
 
 
 class Auth:
@@ -14,7 +14,7 @@ class Auth:
     def __init__(self):
         self._db = DB()
 
-    def register_user(self, email, str, password: str) -> User:
+    def register_user(self, email: str, password: str) -> User:
         """
         Register a new user with an email and a password.
 
@@ -35,12 +35,12 @@ class Auth:
         except NoResultFound:
             pass
 
-        hashed_password = _hash_password(password)
+        hashed_password = self._hash_password(password)
 
-        new_user = self.db.add_user(
+        new_user = self._db.add_user(
                 email=email,
                 hashed_password=hashed_password
-                )
+        )
 
         # litrally return User Object
         return new_user
