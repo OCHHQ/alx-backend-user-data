@@ -48,6 +48,43 @@ def users() -> Any:
         return jsonify({"message": "email already registered"}), 400
 
 
+@app.route('/sessions', methods=['POST'])
+def login():
+    """
+    Handle user login via POST request.
+
+    Form Data:
+        email: User's email
+        password: User's password
+
+    Returns:
+        JSON response with user email and login message,
+        sets session_id cookie on successful login
+    """
+    # Get email and password from form data
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    # Validate login credentials
+    if not AUTH.valid_login(email, password):
+        # If credentials are invalid, abort with 401 Unauthorized
+        abort(401)
+
+    # Generate session ID for the user
+    session_id = AUTH.create_session(email)
+
+    # Create response with login confirmation
+    response = make_response(jsonify({
+        "email": email,
+        "message": "logged in"
+    }))
+
+    # Set session_id as a cookie
+    response.set_cookie('session_id', session_id)
+
+    return response
+
+
 if __name__ == "__main__":
     """
     Main entry point of the application.
