@@ -127,24 +127,24 @@ class Auth:
         except Exception:
             return None
 
-    def get_user_from_session_id(
-            self, session_id: Optional[str]) -> Optional[User]:
+    def get_user_from_session_id(self, session_id: str) -> Union[User, None]:
         """
-        Find a user by session ID.
+        Retrieve a user based on the session ID.
 
         Args:
-            session_id (str): The session ID to search for.
+            session_id (str): The session ID to lookup
 
         Returns:
-            User or None: The user associated with the session ID,
-            or None if not found.
+            User or None: The corresponding user if found, None otherwise
         """
+        # If session_id is None, return None
         if session_id is None:
             return None
 
         try:
+            # Attempt to find user by session ID using database method
             user = self._db.find_user_by(session_id=session_id)
+            return user
         except Exception:
+            # If no user is found or any error occurs, return None
             return None
-
-        return user
