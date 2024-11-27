@@ -7,6 +7,7 @@ from user import User
 from sqlalchemy.orm.exc import NoResultFound
 import bcrypt
 import uuid
+from typing import Union
 
 
 def _hash_password(password: str) -> bytes:
