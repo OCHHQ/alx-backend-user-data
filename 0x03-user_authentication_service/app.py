@@ -33,6 +33,9 @@ def users() -> Any:
     """
     email = request.form.get('email')  # Get 'email' from the form data
     password = request.form.get('password')
+
+    if not email or not password:
+        abort(401)
     # Ensure email and password are provided
     if not email or not password:
         return jsonify({"message": "email and password are required"}), 400
