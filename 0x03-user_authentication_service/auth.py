@@ -162,11 +162,13 @@ class Auth:
             None
         """
         if not user_id:  # Check if user_id is valid
-            return
+            return None
 
         try:
             # Update the user's session_id to None
             self._db.update_user(user_id, session_id=None)
+            return "OK"
         except Exception as e:
             # Log or handle exceptions as needed
             print(f"Error destroying session for user {user_id}: {e}")
+            return None
