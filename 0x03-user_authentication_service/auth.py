@@ -91,7 +91,7 @@ class Auth:
             pass
         return False
 
-    def _generate_uuid() -> str:
+    def generate_uuid() -> str:
         """
         Generate a new UUID.
 
