@@ -8,6 +8,7 @@ from sqlalchemy.orm.exc import NoResultFound
 import bcrypt
 import uuid
 from typing import Optional
+from models.user import User
 
 
 def _hash_password(password: str) -> bytes:
@@ -124,4 +125,26 @@ class Auth:
 
             return session_id
         except Exception:
+            return None
+
+    def get_user_from_session_id(self, session_id: str) -> Union[User, None]:
+        """
+        Retrieve a user based on the session ID.
+
+        Args:
+            session_id (str): The session ID to lookup
+
+        Returns:
+            User or None: The corresponding user if found, None otherwise
+        """
+        # If session_id is None, return None immediately
+        if session_id is None:
+            return None
+
+        try:
+            # Attempt to find user by session ID using database method
+            user = self._db.find_user_by(session_id=session_id)
+            return user
+        except Exception:
+            # If no user is found or any error occurs, return None
             return None
