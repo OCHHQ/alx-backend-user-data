@@ -2,7 +2,7 @@
 """
 Basic Flask app module for user authentication service.
 """
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort, make_response
 from auth import Auth
 from typing import Dict, Any
 
