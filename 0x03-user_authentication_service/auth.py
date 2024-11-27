@@ -7,7 +7,7 @@ from user import User
 from sqlalchemy.orm.exc import NoResultFound
 import bcrypt
 import uuid
-from typing import Union
+from typing import Optional
 
 
 def _hash_password(password: str) -> bytes:
@@ -99,3 +99,29 @@ class Auth:
             str: String representation of a new UUID
         """
         return str(uuid.uuid4())
+
+    def create_session(self, email: str) -> Optional[str]:
+        """
+        Create a session ID for a user based on their email.
+
+        Args:
+            email (str): User's email address.
+
+        Returns:
+            Optional[str]: The session ID if the user exists, or None.
+        """
+        try:
+            # Locate the user by email
+            user = self._db.find_user_by(email=email)
+            if not user:
+                return None
+
+            # Generate a new UUID for the session ID
+            session_id = _generate_uuid()
+
+            # Update the user's session ID in the database
+            self._db.update_user(user.id, session_id=session_id)
+
+            return session_id
+        except Exception:
+            return None
