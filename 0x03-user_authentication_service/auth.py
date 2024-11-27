@@ -90,16 +90,11 @@ class Auth:
             pass
         return False
 
-    def create_session(self, email: str) -> str:
+    def _generate_uuid() -> str:
         """
-        Create a session ID for a user.
-
-        Args:
-            email (str): The user's email.
+        Generate a new UUID.
 
         Returns:
-            str: The session ID.
+            str: String representation of a new UUID
         """
-        session_id = _generate_uuid()
-        # Logic to associate the session ID with the user (e.g., in a database)
-        return session_id
+        return str(uuid.uuid4())
