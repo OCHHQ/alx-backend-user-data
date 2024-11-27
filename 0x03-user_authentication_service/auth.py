@@ -7,7 +7,7 @@ from user import User
 from sqlalchemy.orm.exc import NoResultFound
 import bcrypt
 import uuid
-from typing import Optional
+from typing import Optional, Union
 from models.user import User
 
 
@@ -32,6 +32,16 @@ def _hash_password(password: str) -> bytes:
 
     # Step 3: Return the hashed password
     return hashed_password
+
+
+def _generate_uuid() -> str:
+    """
+    Generate a new UUID.
+
+    Returns:
+        str: String representation of a new UUID
+    """
+    return str(uuid.uuid4())
 
 
 class Auth:
@@ -92,15 +102,6 @@ class Auth:
             pass
         return False
 
-    def generate_uuid() -> str:
-        """
-        Generate a new UUID.
-
-        Returns:
-            str: String representation of a new UUID
-        """
-        return str(uuid.uuid4())
-
     def create_session(self, email: str) -> Optional[str]:
         """
         Create a session ID for a user based on their email.
@@ -137,8 +138,8 @@ class Auth:
         Returns:
             User or None: The corresponding user if found, None otherwise
         """
-        # If session_id is None, return None
-        if session_id is None:
+        # If session_id is None or empty, return None
+        if not session_id:
             return None
 
         try:
